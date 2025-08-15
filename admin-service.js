@@ -1,14 +1,12 @@
-
 const admin = require('firebase-admin');
 
-// Initialize Firebase Admin SDK
-// You'll need to add your service account key file to your backend
-// Download it from Firebase Console > Project Settings > Service Accounts
-const serviceAccount = require('./firebase-service-account-key.json');
+// Parse the service account credentials from environment variable
+// Make sure you added FIREBASE_SERVICE_ACCOUNT in Render as a single-line JSON string
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 if (!admin.apps.length) {
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
+    credential: admin.credential.cert(serviceAccount),
   });
 }
 
